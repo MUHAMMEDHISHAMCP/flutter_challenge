@@ -1,0 +1,40 @@
+name: personal_expense_tracker
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.1 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  intl: ^0.19.0
+  flutter_bloc: ^8.1.6
+  hive_flutter: ^1.1.0
+  gap: ^3.0.1
+  equatable: ^2.0.5
+  get_it: ^7.7.0
+  syncfusion_flutter_charts: ^26.1.42
+  flutter_local_notifications: ^17.2.1+2
+  rxdart: ^0.28.0
+  timezone: ^0.9.4
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  hive_generator: ^1.1.0
+  build_runner: ^2.0.0
+
+
+flutter:
+  uses-material-design: true
+
+ 
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+
