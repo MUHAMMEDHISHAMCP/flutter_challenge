@@ -107,8 +107,11 @@ The user interface of the Expense Tracker App is designed to be intuitive and us
 Workflow:
 
 > `Add Transaction` : Users can add a transaction using the 'Add' button on the home screen.
+
 > `Update or Delete` : Users can view all added expenses on the home screen. Pressing an expense tile navigates to the update screen. Users can delete an expense by swiping the item to the left or right.
+
 > `Summary` : At the top of the home screen, there is a card showing the total expense and a button for viewing the summary.
+
 > `Notification` : In the app settings screen, there is an option to schedule notifications.
 
 
