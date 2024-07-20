@@ -3,9 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:personal_expense_tracker/data/datasources/expense_local_data_source.dart';
 import 'package:personal_expense_tracker/data/model/expense_model.dart';
 import 'dart:io';
-import 'package:path/path.dart' as path;
 
-// Mock class for Hive Box
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
