@@ -37,7 +37,7 @@ class AppLightTheme {
       ),
       inputDecorationTheme: const InputDecorationTheme(
         hoverColor: AppColor.secondary,
-        labelStyle: TextStyle(color: AppColor.shadowColor),
+        labelStyle: TextStyle(color: AppColor.black),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: AppColor.secondary, // Color when the TextField is focused

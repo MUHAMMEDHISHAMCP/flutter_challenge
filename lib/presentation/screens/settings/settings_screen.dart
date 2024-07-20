@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_expense_tracker/bloc/expense_bloc/expense_bloc.dart';
@@ -7,8 +8,10 @@ import 'package:personal_expense_tracker/bloc/expense_bloc/expense_event.dart';
 import 'package:personal_expense_tracker/core/extensions/text_style_extension.dart';
 import 'package:personal_expense_tracker/core/services/notification_services.dart';
 import 'package:personal_expense_tracker/core/utilities/custom_dialogs.dart';
-import 'package:personal_expense_tracker/features/settings/widgets/settings_tile.dart';
+import 'package:personal_expense_tracker/presentation/screens/settings/widgets/settings_tile.dart';
 
+
+@RoutePage()
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 

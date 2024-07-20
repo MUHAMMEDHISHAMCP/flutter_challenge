@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:personal_expense_tracker/data/local_data_models/expense_model.dart';
+import 'package:personal_expense_tracker/data/model/expense_model.dart';
 import 'package:personal_expense_tracker/repository/expense_db_repository.dart';
 import 'expense_event.dart';
 import 'expense_state.dart';

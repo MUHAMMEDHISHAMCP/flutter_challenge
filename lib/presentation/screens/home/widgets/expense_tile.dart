@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:personal_expense_tracker/core/config/app_color.dart';
 import 'package:personal_expense_tracker/core/extensions/date_time_extention.dart';
 import 'package:personal_expense_tracker/core/extensions/text_style_extension.dart';
-import 'package:personal_expense_tracker/data/local_data_models/expense_model.dart';
+import 'package:personal_expense_tracker/data/model/expense_model.dart';
 
 class ExpenseTile extends StatelessWidget {
   const ExpenseTile({super.key, required this.expense});

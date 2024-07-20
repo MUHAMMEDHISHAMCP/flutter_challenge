@@ -1,5 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:personal_expense_tracker/data/local_data_models/expense_model.dart';
+import 'package:personal_expense_tracker/data/model/expense_model.dart';
 import 'package:personal_expense_tracker/repository/expense_db_repository.dart';
 
 class ExpenseLocalDataSource implements ExpenseDbRepository {

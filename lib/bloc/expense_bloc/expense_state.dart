@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:personal_expense_tracker/data/local_data_models/expense_model.dart';
+import 'package:personal_expense_tracker/data/model/expense_model.dart';
 
 abstract class ExpenseState extends Equatable {
   const ExpenseState();

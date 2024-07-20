@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:personal_expense_tracker/bloc/summary_bloc/summary_bloc.dart';
 import 'package:personal_expense_tracker/core/extensions/text_style_extension.dart';
-import 'package:personal_expense_tracker/data/local_data_models/expense_model.dart';
-import 'package:personal_expense_tracker/data/models/chart_data_model.dart';
-import 'package:personal_expense_tracker/features/screens/home/widgets/expense_tile.dart';
+import 'package:personal_expense_tracker/data/model/expense_model.dart';
+import 'package:personal_expense_tracker/data/model/chart_data_model.dart';
+import 'package:personal_expense_tracker/presentation/screens/home/widgets/expense_tile.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class ChartView extends StatelessWidget {

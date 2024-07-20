@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_expense_tracker/bloc/summary_bloc/summary_bloc.dart';
@@ -5,10 +6,11 @@ import 'package:personal_expense_tracker/bloc/summary_bloc/summary_event.dart';
 import 'package:personal_expense_tracker/bloc/summary_bloc/summary_state.dart';
 import 'package:personal_expense_tracker/core/config/app_color.dart';
 import 'package:personal_expense_tracker/core/extensions/text_style_extension.dart';
-import 'package:personal_expense_tracker/data/local_data_models/expense_model.dart';
-import 'package:personal_expense_tracker/features/screens/summary_page/widgets/chart_view.dart';
+import 'package:personal_expense_tracker/data/model/expense_model.dart';
+import 'package:personal_expense_tracker/presentation/screens/summary_page/widgets/chart_view.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+@RoutePage()
 class SummaryScreen extends StatefulWidget {
   const SummaryScreen({super.key});
 

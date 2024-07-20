@@ -1,14 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:personal_expense_tracker/core/config/app_color.dart';
 import 'package:personal_expense_tracker/core/extensions/text_style_extension.dart';
-import 'package:personal_expense_tracker/features/screens/summary_page/summary_screen.dart';
+import 'package:personal_expense_tracker/presentation/screens/summary_page/summary_screen.dart';
+import 'package:personal_expense_tracker/routes/app_router.gr.dart';
 
 // ignore: must_be_immutable
 class ExpenseCardTile extends StatelessWidget {
- const ExpenseCardTile({super.key,this.totalAmount});
+  const ExpenseCardTile({super.key, this.totalAmount});
   final double? totalAmount;
-
 
   getName() async {}
 
@@ -47,8 +48,8 @@ class ExpenseCardTile extends StatelessWidget {
                         .bold
                         .s22
                         .primary),
-                        const Gap(8),
-                          Text(  (totalAmount??0.0).toStringAsFixed(2),
+                const Gap(8),
+                Text((totalAmount ?? 0.0).toStringAsFixed(2),
                     style: Theme.of(context)
                         .textTheme
                         .labelMedium!
@@ -63,7 +64,10 @@ class ExpenseCardTile extends StatelessWidget {
                       child: CardButoon(
                         iconData: Icons.add,
                         buttonText: "Add Expense",
-                        onPressed: () {},
+                        onPressed: () {
+                          context.router.push(
+                              AddOrUpdateRoute(isUpdate: false, details: null));
+                        },
                       ),
                     ),
                     const Gap(8),
@@ -72,9 +76,7 @@ class ExpenseCardTile extends StatelessWidget {
                         iconData: Icons.keyboard_double_arrow_up_outlined,
                         buttonText: "Summary",
                         onPressed: () {
-                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const SummaryScreen()
-                              ));
+                          context.router.push(const SummaryRoute());
                         },
                       ),
                     )
