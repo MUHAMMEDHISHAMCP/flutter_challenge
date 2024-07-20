@@ -4,6 +4,7 @@ import 'package:personal_expense_tracker/core/config/app_color.dart';
 class AppLightTheme {
   static ThemeData lightTheme = ThemeData(
       appBarTheme: const AppBarTheme(
+        centerTitle: false,
         backgroundColor: AppColor.primary,
         iconTheme: IconThemeData(color: AppColor.secondary),
       ),
