@@ -5,7 +5,6 @@ import 'package:personal_expense_tracker/application/summary_bloc/summary_bloc.d
 import 'package:personal_expense_tracker/core/extensions/text_style_extension.dart';
 import 'package:personal_expense_tracker/data/model/expense_model.dart';
 import 'package:personal_expense_tracker/data/model/chart_data_model.dart';
-import 'package:personal_expense_tracker/presentation/screens/home/widgets/expense_tile.dart';
 import 'package:personal_expense_tracker/presentation/screens/summary_page/widgets/top_spending_tile.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 

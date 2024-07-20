@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import 'package:personal_expense_tracker/application/expense_bloc/expense_event.
 import 'package:personal_expense_tracker/application/expense_bloc/expense_state.dart';
 import 'package:personal_expense_tracker/core/config/app_color.dart';
 import 'package:personal_expense_tracker/core/extensions/text_style_extension.dart';
-import 'package:personal_expense_tracker/core/utilities/custom_dialogs.dart';
 import 'package:personal_expense_tracker/presentation/screens/home/widgets/appbar_text_widget.dart';
 import 'package:personal_expense_tracker/presentation/screens/home/widgets/expense_empty_widget.dart';
 import 'package:personal_expense_tracker/presentation/screens/home/widgets/expense_tile.dart';
@@ -46,7 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   context.router.push(const SettingsRoute()).then(
                     (value) {
                       if (value == true) {
-                        log("fdl;dfl;");
                         context.read<ExpenseBloc>().add(GetAllExpenses());
                       }
                     },

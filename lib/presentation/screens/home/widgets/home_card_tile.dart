@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:personal_expense_tracker/core/config/app_color.dart';
 import 'package:personal_expense_tracker/core/extensions/text_style_extension.dart';
-import 'package:personal_expense_tracker/presentation/screens/summary_page/summary_screen.dart';
 import 'package:personal_expense_tracker/routes/app_router.gr.dart';
 
 // ignore: must_be_immutable

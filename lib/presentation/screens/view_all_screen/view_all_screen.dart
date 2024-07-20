@@ -2,14 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_expense_tracker/application/expense_bloc/expense_bloc.dart';
-import 'package:personal_expense_tracker/application/expense_bloc/expense_event.dart';
 import 'package:personal_expense_tracker/application/expense_bloc/expense_state.dart';
 import 'package:personal_expense_tracker/core/config/app_color.dart';
 import 'package:personal_expense_tracker/core/extensions/text_style_extension.dart';
-import 'package:personal_expense_tracker/core/utilities/custom_dialogs.dart';
 import 'package:personal_expense_tracker/data/model/expense_model.dart';
 import 'package:personal_expense_tracker/presentation/screens/home/widgets/expense_tile.dart';
-import 'package:personal_expense_tracker/routes/app_router.gr.dart';
 
 @RoutePage()
 class ViewAllExpenseScreen extends StatelessWidget {
