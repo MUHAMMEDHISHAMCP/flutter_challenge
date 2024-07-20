@@ -1,6 +1,6 @@
 # flutter_challenge
 
-Flutter Article List Application
+Flutter personal Expense Tracker Application
 
 Overview:
 
