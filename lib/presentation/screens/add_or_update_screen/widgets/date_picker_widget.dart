@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:personal_expense_tracker/bloc/expense_bloc/expense_bloc.dart';
-import 'package:personal_expense_tracker/bloc/expense_bloc/expense_state.dart';
+import 'package:personal_expense_tracker/application/expense_bloc/expense_bloc.dart';
+import 'package:personal_expense_tracker/application/expense_bloc/expense_state.dart';
 import 'package:personal_expense_tracker/core/config/app_color.dart';
 import 'package:personal_expense_tracker/core/extensions/date_time_extention.dart';
 

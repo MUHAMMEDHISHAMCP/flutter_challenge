@@ -17,11 +17,12 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     on<ClearExpenseDb>(_clearDb);
   }
 
-    Future<void> _getAllExpense(
+  Future<void> _getAllExpense(
       GetAllExpenses event, Emitter<ExpenseState> emit) async {
     try {
       final expenses = await repository.getAllExpense();
       if (expenses.isNotEmpty) {
+        log(expenses.length.toString());
         expenses.sort(
           (a, b) => b.date.compareTo(a.date),
         );
@@ -66,13 +67,14 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     }
   }
 
-
-
   Future<void> _clearDb(
       ClearExpenseDb event, Emitter<ExpenseState> emit) async {
     try {
-      await repository.clearDb();
-      add(GetAllExpenses());
+      await repository.clearDb().then(
+        (value) {
+          add(GetAllExpenses());
+        },
+      );
     } catch (e) {
       emit(const ExpenseError('Failed to clear Db'));
     }

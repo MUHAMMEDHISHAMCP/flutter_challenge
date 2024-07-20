@@ -4,8 +4,8 @@ import 'package:personal_expense_tracker/core/config/app_color.dart';
 import 'package:personal_expense_tracker/core/extensions/text_style_extension.dart';
 import 'package:personal_expense_tracker/routes/app_router.gr.dart';
 
-class AddButtonFloating extends StatelessWidget {
-  const AddButtonFloating({super.key});
+class AddButton extends StatelessWidget {
+  const AddButton({super.key});
 
   @override
   Widget build(BuildContext context) {

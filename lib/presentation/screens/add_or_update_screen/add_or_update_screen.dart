@@ -2,14 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:personal_expense_tracker/bloc/expense_bloc/expense_bloc.dart';
-import 'package:personal_expense_tracker/bloc/expense_bloc/expense_event.dart';
+import 'package:personal_expense_tracker/application/expense_bloc/expense_bloc.dart';
+import 'package:personal_expense_tracker/application/expense_bloc/expense_event.dart';
 import 'package:personal_expense_tracker/core/config/app_color.dart';
 import 'package:personal_expense_tracker/core/extensions/text_style_extension.dart';
 import 'package:personal_expense_tracker/core/utilities/custom_dialogs.dart';
 import 'package:personal_expense_tracker/core/utilities/custom_snackbar_util.dart';
 import 'package:personal_expense_tracker/data/model/expense_model.dart';
 import 'package:personal_expense_tracker/presentation/screens/add_or_update_screen/widgets/date_picker_widget.dart';
+import 'package:personal_expense_tracker/presentation/screens/add_or_update_screen/widgets/submit_or_delete_button.dart';
 
 @RoutePage()
 class AddOrUpdateScreen extends StatefulWidget {
@@ -53,8 +54,14 @@ class _AddOrUpdateScreenState extends State<AddOrUpdateScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          !widget.isUpdate ? 'Add Expense' : "Edit Expense",
-          style: Theme.of(context).textTheme.bodyMedium!.bold.s18.secondary,
+          !widget.isUpdate ? 'ADD EXPENSE' : "EDIT EXPENSE",
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .bold
+              .s18
+              .latterSpace
+              .secondary,
         ),
       ),
       body: Padding(
@@ -75,7 +82,10 @@ class _AddOrUpdateScreenState extends State<AddOrUpdateScreen> {
               cursorColor: AppColor.secondary,
               controller: amountController,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
+                prefixText: '£ ',
+                prefixStyle:
+                    Theme.of(context).textTheme.bodyMedium!.semiBold.s16.black,
                 labelText: 'Amount',
               ),
             ),
@@ -113,83 +123,62 @@ class _AddOrUpdateScreenState extends State<AddOrUpdateScreen> {
               children: [
                 Visibility(
                   visible: widget.isUpdate,
-                  child: Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: SizedBox(
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColor.redAccent),
-                          onPressed: () {
-                            CustomDialogs().showDeletePopUp(
-                                onConfirmed: () {
-                                  Navigator.of(context).pop();
+                  child: AddOrDeleteButton(
+                    buttonText: "Delete",
+                    buttonColor: AppColor.redAccent,
+                    padding: const EdgeInsets.only(right: 8),
+                    onPressed: () {
+                      CustomDialogs().showDeletePopUp(
+                          onConfirmed: () {
+                            Navigator.of(context).pop();
 
-                                  context.read<ExpenseBloc>().add(
-                                      DeleteExpense(widget.details?.id ?? ""));
-
-                                  Navigator.of(context).pop();
-                                },
-                                message: "Are you sure to want to delete ??",
-                                title: "Alert !!",
-                                context: context);
-
-                            // Handle button press
-
-                            print('Selected Dropdown Option: $_selectedDate');
-                          },
-                          child: const Text('Delete'),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: SizedBox(
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (noteController.text.isEmpty ||
-                            amountController.text.isEmpty ||
-                            _selectedDate == null ||
-                            _selectedCategory == null) {
-                          CustomSnackbarUtils.showCustomSnackBar(
-                              context: context,
-                              message: "Please fill all fields");
-                        } else {
-                          if (widget.isUpdate && widget.details != null) {
-                            context.read<ExpenseBloc>().add(UpdateExpense(
-                                ExpenseDataModel(
-                                    amount: double.parse(amountController.text),
-                                    date: _selectedDate!,
-                                    notes: noteController.text,
-                                    category: _selectedCategory ?? "",
-                                    id: widget.details!.id ?? "")));
-                          } else {
                             context
                                 .read<ExpenseBloc>()
-                                .add(AddExpense(ExpenseDataModel(
-                                  amount: double.parse(amountController.text),
-                                  date: _selectedDate!,
-                                  notes: noteController.text,
-                                  category: _selectedCategory ?? "",
-                                  id: DateTime.now()
-                                      .millisecondsSinceEpoch
-                                      .toString(),
-                                )));
-                          }
-                          Navigator.pop(context);
-                        }
+                                .add(DeleteExpense(widget.details?.id ?? ""));
 
-                        // Handle button press
-
-                        print('Selected Dropdown Option: $_selectedDate');
-                      },
-                      child: const Text('Submit'),
-                    ),
+                            Navigator.of(context).pop();
+                          },
+                          message: "Are you sure to want to delete ??",
+                          title: "Alert !!",
+                          context: context);
+                    },
                   ),
                 ),
+                AddOrDeleteButton(
+                  buttonText: "Save",
+                  onPressed: () {
+                    if (noteController.text.isEmpty ||
+                        amountController.text.isEmpty ||
+                        _selectedDate == null ||
+                        _selectedCategory == null) {
+                      CustomSnackbarUtils.showCustomSnackBar(
+                          context: context, message: "Please fill all fields");
+                    } else {
+                      if (widget.isUpdate && widget.details != null) {
+                        context.read<ExpenseBloc>().add(UpdateExpense(
+                            ExpenseDataModel(
+                                amount: double.parse(amountController.text),
+                                date: _selectedDate!,
+                                notes: noteController.text,
+                                category: _selectedCategory ?? "",
+                                id: widget.details!.id ?? "")));
+                      } else {
+                        context
+                            .read<ExpenseBloc>()
+                            .add(AddExpense(ExpenseDataModel(
+                              amount: double.parse(amountController.text),
+                              date: _selectedDate!,
+                              notes: noteController.text,
+                              category: _selectedCategory ?? "",
+                              id: DateTime.now()
+                                  .millisecondsSinceEpoch
+                                  .toString(),
+                            )));
+                      }
+                      Navigator.pop(context);
+                    }
+                  },
+                )
               ],
             ),
           ],

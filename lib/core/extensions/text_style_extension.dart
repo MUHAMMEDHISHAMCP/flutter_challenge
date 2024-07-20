@@ -55,6 +55,7 @@ extension CustomTextStyle on TextStyle {
   TextStyle get primary => copyWith(color: AppColor.primary);
   TextStyle get secondary => copyWith(color: AppColor.secondary);
   TextStyle get black => copyWith(color: AppColor.black);
+   TextStyle get redAccent => copyWith(color: Colors.red.shade500);
   TextStyle get dateTextColor => copyWith(color: AppColor.dateTextColor);
   TextStyle get desc => copyWith(color: AppColor.descriptionColor);
   TextStyle get timeTextColor => copyWith(color: AppColor.timeTextColor);
@@ -63,6 +64,11 @@ extension CustomTextStyle on TextStyle {
   TextStyle get underline => copyWith(
         decoration: TextDecoration.underline,
         decorationColor: AppColor.primary,
+      );
+
+  // Latter apacing
+        TextStyle get latterSpace => copyWith(
+        letterSpacing: 1,
       );
 
   // Text Height

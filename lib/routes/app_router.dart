@@ -24,5 +24,9 @@ class AppRouter extends $AppRouter {
             page: SettingsRoute.page,
             transitionsBuilder: TransitionsBuilders.slideBottom,
             durationInMilliseconds: 400),
+                CustomRoute(
+            page: ViewAllExpenseRoute.page,
+            transitionsBuilder: TransitionsBuilders.zoomIn,
+            durationInMilliseconds: 400),
       ];
 }

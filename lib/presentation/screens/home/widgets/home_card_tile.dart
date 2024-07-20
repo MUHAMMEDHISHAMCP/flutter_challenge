@@ -49,7 +49,7 @@ class ExpenseCardTile extends StatelessWidget {
                         .s22
                         .primary),
                 const Gap(8),
-                Text((totalAmount ?? 0.0).toStringAsFixed(2),
+                Text("£ ${(totalAmount ?? 0.0).toStringAsFixed(2)}",
                     style: Theme.of(context)
                         .textTheme
                         .labelMedium!
@@ -73,7 +73,7 @@ class ExpenseCardTile extends StatelessWidget {
                     const Gap(8),
                     Expanded(
                       child: CardButoon(
-                        iconData: Icons.keyboard_double_arrow_up_outlined,
+                        iconData: Icons.pie_chart_rounded,
                         buttonText: "Summary",
                         onPressed: () {
                           context.router.push(const SummaryRoute());

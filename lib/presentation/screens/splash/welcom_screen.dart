@@ -72,6 +72,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
+                            FocusScope.of(context).unfocus();
                             final pref = await SharedPreferences.getInstance();
                             await pref.setString(
                                 'userName', nameEditController.text);

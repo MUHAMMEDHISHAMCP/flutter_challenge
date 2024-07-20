@@ -3,13 +3,12 @@ import 'dart:developer';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:personal_expense_tracker/bloc/expense_bloc/expense_bloc.dart';
-import 'package:personal_expense_tracker/bloc/expense_bloc/expense_event.dart';
+import 'package:personal_expense_tracker/application/expense_bloc/expense_bloc.dart';
+import 'package:personal_expense_tracker/application/expense_bloc/expense_event.dart';
 import 'package:personal_expense_tracker/core/extensions/text_style_extension.dart';
 import 'package:personal_expense_tracker/core/services/notification_services.dart';
 import 'package:personal_expense_tracker/core/utilities/custom_dialogs.dart';
 import 'package:personal_expense_tracker/presentation/screens/settings/widgets/settings_tile.dart';
-
 
 @RoutePage()
 class SettingsScreen extends StatefulWidget {
@@ -30,7 +29,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: Text(
           'SETTINGS',
-          style: Theme.of(context).textTheme.bodyMedium!.semiBold.s20.secondary,
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .semiBold
+              .s20
+              .latterSpace
+              .secondary,
         ),
       ),
       body: Padding(
@@ -52,9 +57,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               text: 'Clear App Data',
               onTap: () {
                 CustomDialogs().showDeletePopUp(
-                    onConfirmed: () {
+                    onConfirmed: () async {
                       context.read<ExpenseBloc>().add(ClearExpenseDb());
                       Navigator.of(context).pop();
+                      Future.delayed(
+                        Duration(seconds: 1),
+                        () {
+                          Navigator.of(context).pop(true);
+                        },
+                      );
                     },
                     message:
                         "You will lose your all datas!! \n Are you sure to want to Clear?",
@@ -81,8 +92,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       log(_convertTimeOfDayToDateTime(pickedTIme).toString());
       NotificationService.scheduleNotification(
           0,
-          "Scheduled Notification",
-          "Don't forget add your Transactions",
+          "Time to Add Expenses",
+          "Don't forget add your Expenses",
           _convertTimeOfDayToDateTime(pickedTIme));
     }
   }

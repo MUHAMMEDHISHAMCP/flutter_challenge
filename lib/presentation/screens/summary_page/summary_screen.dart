@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:personal_expense_tracker/bloc/summary_bloc/summary_bloc.dart';
-import 'package:personal_expense_tracker/bloc/summary_bloc/summary_event.dart';
-import 'package:personal_expense_tracker/bloc/summary_bloc/summary_state.dart';
+import 'package:personal_expense_tracker/application/summary_bloc/summary_bloc.dart';
+import 'package:personal_expense_tracker/application/summary_bloc/summary_event.dart';
+import 'package:personal_expense_tracker/application/summary_bloc/summary_state.dart';
 import 'package:personal_expense_tracker/core/config/app_color.dart';
 import 'package:personal_expense_tracker/core/extensions/text_style_extension.dart';
 import 'package:personal_expense_tracker/data/model/expense_model.dart';
@@ -28,83 +28,82 @@ class _SummaryScreenState extends State<SummaryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SummaryBloc,SummaryState>(
+    return BlocConsumer<SummaryBloc, SummaryState>(
         listener: (context, state) {},
         builder: (context, state) {
-if (state is SummaryLoadedState) {
-
-          return DefaultTabController(
-            length: 3,
-            child: Scaffold(
-              appBar: AppBar(
-                title: Text(
-                  'SUMMARY',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .semiBold
-                      .s20
-                      .secondary,
-                ),
-              ),
-              body: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.all(16),
-                    width: double.infinity,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 178, 211, 229),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: TabBar(
-                      tabs: const [
-                        Tab(text: 'Today'),
-                        Tab(text: 'Weekly'),
-                        Tab(text: 'Monthly'),
-                      ],
-                      indicatorColor: AppColor.secondary,
-                      indicatorWeight: 4.0,
-                      labelColor: AppColor.primary,
-                      unselectedLabelColor: AppColor.black.withOpacity(0.8),
-                      labelStyle: const TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.bold),
-                      unselectedLabelStyle: const TextStyle(fontSize: 14.0),
-                      indicator: BoxDecoration(
-                        color: AppColor.secondary,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    
-                  ),
-                   Expanded(
-                    child: TabBarView(
-                      children: [
-                        ChartView(expenses:state.todayExpenses,),
-                        ChartView(expenses:state.weeklyExpense,),
-                        ChartView(expenses:state.monthlyExpenses,),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-  
-}else{
- return Center(
-                  child: Text(
-                    "Something wrong...",
+          if (state is SummaryLoadedState) {
+            return DefaultTabController(
+              length: 3,
+              child: Scaffold(
+                appBar: AppBar(
+                  title: Text(
+                    'SUMMARY',
                     style: Theme.of(context)
                         .textTheme
                         .bodyMedium!
                         .semiBold
                         .s20
-                        .black,
+                        .latterSpace
+                        .secondary,
                   ),
-                );
-
-}
+                ),
+                body: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.all(16),
+                      width: double.infinity,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 178, 211, 229),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: TabBar(
+                        tabs: const [
+                          Tab(text: 'Daily'),
+                          Tab(text: 'Weekly'),
+                          Tab(text: 'Monthly'),
+                        ],
+                        indicatorColor: AppColor.secondary,
+                        indicatorWeight: 4.0,
+                        labelColor: AppColor.primary,
+                        unselectedLabelColor: AppColor.black.withOpacity(0.8),
+                        labelStyle: const TextStyle(
+                            fontSize: 16.0, fontWeight: FontWeight.bold),
+                        unselectedLabelStyle: const TextStyle(fontSize: 14.0),
+                        indicator: BoxDecoration(
+                          color: AppColor.secondary,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: TabBarView(
+                        children: [
+                          ChartView(
+                            expenses: state.todayExpenses,
+                          ),
+                          ChartView(
+                            expenses: state.weeklyExpense,
+                          ),
+                          ChartView(
+                            expenses: state.monthlyExpenses,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          } else {
+            return Center(
+              child: Text(
+                "Something wrong...",
+                style:
+                    Theme.of(context).textTheme.bodyMedium!.semiBold.s20.black,
+              ),
+            );
+          }
         });
   }
 }
@@ -114,7 +113,7 @@ class Tab1Screen extends StatelessWidget {
   final List<ExpenseDataModel> todayExpenses;
   @override
   Widget build(BuildContext context) {
-    return  Center(
+    return Center(
       child: SfCircularChart(
         legend: Legend(isVisible: true),
         series: <CircularSeries>[
@@ -123,10 +122,8 @@ class Tab1Screen extends StatelessWidget {
               isVisible: true,
             ),
             dataSource: todayExpenses,
-            xValueMapper: (ExpenseDataModel data, _) =>
-                data.category,
-            yValueMapper: (ExpenseDataModel data, _) =>
-                data.amount,
+            xValueMapper: (ExpenseDataModel data, _) => data.category,
+            yValueMapper: (ExpenseDataModel data, _) => data.amount,
             explode: true,
           )
         ],

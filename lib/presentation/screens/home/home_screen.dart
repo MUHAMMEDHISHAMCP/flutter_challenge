@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:personal_expense_tracker/bloc/expense_bloc/expense_bloc.dart';
-import 'package:personal_expense_tracker/bloc/expense_bloc/expense_event.dart';
-import 'package:personal_expense_tracker/bloc/expense_bloc/expense_state.dart';
+import 'package:personal_expense_tracker/application/expense_bloc/expense_bloc.dart';
+import 'package:personal_expense_tracker/application/expense_bloc/expense_event.dart';
+import 'package:personal_expense_tracker/application/expense_bloc/expense_state.dart';
 import 'package:personal_expense_tracker/core/config/app_color.dart';
 import 'package:personal_expense_tracker/core/extensions/text_style_extension.dart';
 import 'package:personal_expense_tracker/core/utilities/custom_dialogs.dart';
@@ -41,7 +43,14 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             IconButton(
                 onPressed: () {
-                  context.router.push(const SettingsRoute());
+                  context.router.push(const SettingsRoute()).then(
+                    (value) {
+                      if (value == true) {
+                        log("fdl;dfl;");
+                        context.read<ExpenseBloc>().add(GetAllExpenses());
+                      }
+                    },
+                  );
                 },
                 icon: const Icon(
                   Icons.settings,
@@ -66,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
 
                 return Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -74,15 +83,35 @@ class _HomeScreenState extends State<HomeScreen> {
                         totalAmount: state.totalAmount,
                       ),
                       const Gap(16),
-                      Text(
-                        "Your Expenses",
-                        textAlign: TextAlign.start,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .extraBold
-                            .s19
-                            .black,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Your Expenses",
+                            textAlign: TextAlign.start,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .extraBold
+                                .s19
+                                .black,
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                context.router.push(ViewAllExpenseRoute(
+                                    expenses: state.expenses));
+                              },
+                              child: Text(
+                                "View All",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .semiBold
+                                    .s14
+                                    .latterSpace
+                                    .secondary,
+                              ))
+                        ],
                       ),
                       const Gap(16),
                       Expanded(
@@ -90,37 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemCount: state.expenses.length,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
-                          return GestureDetector(
-                              onTap: () {
-                                context.router.push(AddOrUpdateRoute(
-                                    isUpdate: true,
-                                    details: state.expenses[index]));
-                              },
-                              child: Dismissible(
-                                  confirmDismiss: (direction) async {
-                                    CustomDialogs().showDeletePopUp(
-                                        onConfirmed: () {
-                                          context.read<ExpenseBloc>().add(
-                                              DeleteExpense(
-                                                  state.expenses[index].id ??
-                                                      ""));
-                                          Navigator.of(context).pop();
-                                        },
-                                        message:
-                                            "Are you sure to want to delete ??",
-                                        title: "Alert !!",
-                                        context: context);
-                                    return;
-                                  },
-                                  background: Container(
-                                    color: AppColor.redAccent,
-                                    alignment: Alignment.centerRight,
-                                    padding: const EdgeInsets.all(16),
-                                    child: const Icon(Icons.delete_outlined),
-                                  ),
-                                  key: const Key(""),
-                                  child: ExpenseTile(
-                                      expense: state.expenses[index])));
+                          return ExpenseTile(expense: state.expenses[index]);
                         },
                       ))
                     ],
@@ -129,6 +128,6 @@ class _HomeScreenState extends State<HomeScreen> {
               }
               return const SizedBox();
             }),
-        floatingActionButton: const AddButtonFloating());
+        floatingActionButton: const AddButton());
   }
 }
